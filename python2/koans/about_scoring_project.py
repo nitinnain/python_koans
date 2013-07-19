@@ -34,8 +34,33 @@ from runner.koan import *
 # Your goal is to write the score method.
 
 def score(dice):
-    # You need to write this method
-    pass
+    count = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
+    
+    throw_count = lambda x: count[x]+1
+    
+    for number in dice:
+        count[number] = throw_count(number)
+        
+    _score = 0
+
+    for x in range (1,7):
+        mux = 1; 
+        if count == 6: mux = 2
+        
+        if count[x] > 2:
+            
+            if x == 1:
+                _score += 1000*mux
+            else:
+                _score += x*100*mux
+            
+    if (count[1] % 3):
+        _score += (count[1] % 3)*100
+        
+    if (count[5] %3 ):
+        _score += (count[5] % 3)*50
+        
+    return _score
 
 
 class AboutScoringProject(Koan):
